@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue',
+    'Helvetica', sans-serif;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.height-screen-helper {
+  height: calc(100vh - 80px);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  /* For Chrome, Safari and Opera */
+  display: none;
+}
+
+a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* Carbon Connect */
+.cc-bg-white {
+  background-color: #000 !important;
+}
+
+.cc-w-full .cc-h-12 {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.cc-text-base {
+  color: #fff !important;
+}
+
+.cc-flex blockquote,
+.cc-flex dl,
+.cc-flex dd,
+.cc-flex h1,
+.cc-flex h2,
+.cc-flex h3,
+.cc-flex h4,
+.cc-flex h5,
+.cc-flex h6,
+.cc-flex hr,
+.cc-flex figure,
+.cc-flex p,
+.cc-flex pre {
+  color: #fff !important;
+}
+
+button.cc-flex-row {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.cc-flex-row p {
+  color: #000 !important;
+}
+
+.cc-text-gray-400.cc-font-normal {
+  color: #fff !important;
+}
+
+.cc-border-4 {
+  border-width: 1px !important;
+  color: #fff !important;
+}
+
+@layer base {
+  :root {
+    /* Temporarily set all to dark bc default dark theme in provider not workign  */
+    --background: 240 10% 3.9%;
+    --background-muted: 240 5% 10%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 87%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --primary-muted: 210 9% 85%;
+    --primary-muted-foreground: 240 5.9% 40%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 30%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    /* --background: 0 0% 100%;
+    --background-muted: 240 5% 10%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --brand: 240 58% 45%;
+
+    --gold: 45 100% 50%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    --radius: 0.5rem; */
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --background-muted: 240 5% 10%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 87%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --primary-muted: 210 9% 85%;
+    --primary-muted-foreground: 240 5.9% 40%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 30%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
