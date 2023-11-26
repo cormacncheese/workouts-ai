@@ -6,12 +6,12 @@ import { Analytics } from '@vercel/analytics/react';
 import { CSPostHogProvider } from './providers';
 
 export const dynamic = 'force-dynamic';
+
 import 'styles/global.css';
 
 const meta = {
-  title: 'maia',
-  description:
-    'Train your own AI virtual assistant that does your work for you. Integrates  will all your favorite apps.',
+  title: 'Workouts AI',
+  description: 'Generate your own workout plan with AI.',
   cardImage:
     'https://dcsladfmohmhomyxvhzz.supabase.co/storage/v1/object/public/general/website/open_graph.png',
   robots: 'follow, index',
@@ -22,7 +22,7 @@ const meta = {
 
 export const metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || 'https://tellmaia.com'
+    process.env.NEXT_PUBLIC_BASE_URL || 'https://aiworkouts.co'
   ),
   openGraph: {
     title: meta.title,
@@ -39,16 +39,16 @@ export const metadata = {
         url: meta.cardImage,
         width: 1800,
         height: 1600,
-        alt: 'train your ai agent'
+        alt: 'generate your AI workout plan'
       }
     ],
-    twitter: {
-      card: 'summary_large_image',
-      title: meta.title,
-      description: meta.description,
-      creator: '@tellmaia_to',
-      images: [meta.cardImage]
-    },
+    // twitter: {
+    //   card: 'summary_large_image',
+    //   title: meta.title,
+    //   description: meta.description,
+    //   creator: '@tellmaia_to',
+    //   images: [meta.cardImage]
+    // },
     locale: 'en_US',
     type: 'website'
   }

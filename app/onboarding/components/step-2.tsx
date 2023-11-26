@@ -29,13 +29,12 @@ export function OnboardingStep2({
   const { toast } = useToast();
 
   const [bio, setBio] = React.useState<any>({
-    ai_learned: '',
-    about_you: '',
-    working_on: '',
-    todo_list: '',
-    goals: '',
-    writing_style: '',
-    hobbies: ''
+    fitness_goals: '',
+    workout_location: '',
+    workout_frequency: '',
+    workout_duration: '',
+    workout_experience: '',
+    workout_intensity: ''
   });
   const [loading, setLoading] = React.useState(false);
 
@@ -66,16 +65,16 @@ export function OnboardingStep2({
 
   return (
     <OnboardingWrapper>
-      <HeaderText>What are you working on?</HeaderText>
+      <HeaderText>What are your fitness goals</HeaderText>
       <SubHeaderText>
-        This will help me understand how I can best assist you.
+        Growing muscles, getting lean, losing weight, etc.
       </SubHeaderText>
 
       <Textarea
-        placeholder="Growing my business"
-        value={bio?.working_on}
+        placeholder="Growing my chest and back muscles"
+        value={bio?.fitness_goals}
         onChange={(e) => {
-          setBio({ ...bio, working_on: e.target.value });
+          setBio({ ...bio, fitness_goals: e.target.value });
         }}
       />
 

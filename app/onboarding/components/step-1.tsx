@@ -51,7 +51,10 @@ export function OnboardingStep1({
 
   return (
     <OnboardingWrapper>
-      <HeaderText>Welcome to Zenbase. What should I call you?</HeaderText>
+      <HeaderText>
+        Welcome to Workouts AI, I'm your personal trainer. What should I call
+        you?
+      </HeaderText>
 
       <Input
         type="name"

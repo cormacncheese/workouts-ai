@@ -31,11 +31,11 @@ export default async function Navbar() {
         >
           <Logo />
           <Typography
-            size="xl"
+            size="3xl"
             fontWeight="normal"
-            className="text-slate-300 ml-2"
+            className="text-slate-300 ml-4"
           >
-            Zenbase
+            Workouts AI
           </Typography>
         </Link>
 

@@ -83,12 +83,12 @@ export async function updateOnboardingStatus(uid: string, status: boolean) {
 export async function saveUserBio(bio: any) {
   const text = JSON.stringify(bio);
 
-  // first moderate
-  const isClean = await moderateText(text);
+  // // first moderate
+  // const isClean = await moderateText(text);
 
-  if (!isClean) {
-    throw new Error('Bio contains inappropriate content.');
-  }
+  // if (!isClean) {
+  //   throw new Error('Bio contains inappropriate content.');
+  // }
 
   const session = await getSession();
 

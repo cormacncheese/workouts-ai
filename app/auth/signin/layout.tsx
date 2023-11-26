@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Logo from '@/components/icons/Logo';
 import AuthMenu from '@/app/auth/signin/auth-menu';
+import Typography from '@/components/molecules/Typography';
 
 export default function AuthLayout({
   children
@@ -14,6 +15,13 @@ export default function AuthLayout({
         <div className="">
           <Link href="/" aria-label="Logo" className="flex items-center">
             <Logo />
+            <Typography
+              size="3xl"
+              fontWeight="normal"
+              className="text-slate-300 ml-4"
+            >
+              Workouts AI
+            </Typography>
           </Link>
         </div>
 

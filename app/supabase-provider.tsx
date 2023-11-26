@@ -24,10 +24,8 @@ export default function SupabaseProvider({
 
   const homePages = [
     '/',
-    '/manifesto',
     '/legal/terms-of-use',
     '/legal/privacy-policy',
-    '/blog',
     '/auth/signin'
   ];
 
@@ -35,18 +33,17 @@ export default function SupabaseProvider({
     const {
       data: { subscription }
     } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('session: ', session);
       if (session?.user) {
-        const userData = await getCurrentUserData();
-
-        if (homePages.includes(pathname)) {
-          if (userData && !userData.has_onboarded) {
-            router.push('/onboarding');
-          } else {
-            router.push('/dashboard/assistant');
-          }
-        }
-
-        router.refresh();
+        // const userData = await getCurrentUserData();
+        // if (homePages.includes(pathname)) {
+        //   if (userData && !userData.has_onboarded) {
+        //     router.push('/onboarding');
+        //   } else {
+        //     router.push('/dashboard/assistant');
+        //   }
+        // }
+        // router.refresh();
       } else if (!session?.user && !homePages.includes(pathname)) {
         // direct to home if not signed in
         router.push('/');

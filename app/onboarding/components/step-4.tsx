@@ -1,72 +1,77 @@
 'use client';
 
-import React from 'react';
-import BottomButtons from './bottom-buttons';
+import React, { useEffect } from 'react';
 import { updateOnboardingStep } from '@/app/actions/user';
-import HeaderText from './header-text';
+import BottomButtons from './bottom-buttons';
+import { useToast } from '@/components/ui/use-toast';
+import { Textarea } from '@/components/ui/textarea';
+import { saveUserBio } from '@/app/actions/user';
+import Typography from '@/components/molecules/Typography';
 import OnboardingWrapper from './wrapper';
-import CarbonConnectUrl from '@/app/dashboard/assistant/components/carbon-connect-url';
-import { Button } from '@/components/ui/button';
-import { Link } from 'lucide-react';
+import HeaderText from './header-text';
 import SubHeaderText from './sub-header-text';
 
 type Props = {
   uid: string;
-  userData: any;
   userBio: any;
   step: number;
   setStep: (step: number) => void;
 };
 
-export function OnboardingStep4({
-  uid,
-  userData,
-  userBio,
-  step,
-  setStep
-}: Props) {
+export function OnboardingStep4({ uid, userBio, step, setStep }: Props) {
+  const { toast } = useToast();
+
+  const [bio, setBio] = React.useState<any>({
+    fitness_goals: '',
+    workout_location: '',
+    workout_frequency: '',
+    workout_experience: '',
+    workout_intensity: ''
+  });
   const [loading, setLoading] = React.useState(false);
-  const [isOpenCarbonUrl, setIsOpenCarbonUrl] = React.useState(false);
+
+  useEffect(() => {
+    if (userBio?.bio) {
+      setBio(userBio?.bio);
+    }
+  }, [userBio]);
 
   const submit = async () => {
     setLoading(true);
+    try {
+      const res = await saveUserBio(bio);
 
-    updateOnboardingStep(uid, step + 1);
-    setStep(step + 1);
-
+      if (res) {
+        updateOnboardingStep(uid, step + 1);
+        setStep(step + 1);
+      } else {
+        throw new Error('Error saving bio');
+      }
+    } catch (e) {
+      toast({
+        title: 'Something went wrong. Please try again.'
+      });
+    }
     setLoading(false);
   };
 
   return (
     <OnboardingWrapper>
-      <HeaderText>Connect your website or any links</HeaderText>
-      <SubHeaderText>
-        I'll read the content on your website and any links you send me.
-      </SubHeaderText>
+      <HeaderText>How many days a week do you workout?</HeaderText>
+      <SubHeaderText>1-7 days, 1-3 times a day</SubHeaderText>
 
-      <CarbonConnectUrl
-        uid={uid || ''}
-        open={isOpenCarbonUrl}
-        setOpen={setIsOpenCarbonUrl}
+      <Textarea
+        placeholder="6 days, once a day"
+        value={bio?.workout_frequency}
+        onChange={(e) => {
+          setBio({ ...bio, workout_frequency: e.target.value });
+        }}
       />
-      <div className="pb-8">
-        <div className="flex flex-row gap-2">
-          <Button
-            variant="default"
-            loading={loading}
-            onClick={() => setIsOpenCarbonUrl(true)}
-          >
-            <Link className="w-4 h-4 mr-2" />
-            Attach a website
-          </Button>
-        </div>
-      </div>
 
       <BottomButtons
         step={step}
         setStep={setStep}
         handleSubmit={submit}
-        allowSkip={true}
         isLoading={loading}
       />
     </OnboardingWrapper>

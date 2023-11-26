@@ -1,63 +1,71 @@
 'use client';
 
-import React from 'react';
-import BottomButtons from './bottom-buttons';
+import React, { useEffect } from 'react';
 import { updateOnboardingStep } from '@/app/actions/user';
-import HeaderText from './header-text';
+import BottomButtons from './bottom-buttons';
+import { useToast } from '@/components/ui/use-toast';
+import { Textarea } from '@/components/ui/textarea';
+import { saveUserBio } from '@/app/actions/user';
+import Typography from '@/components/molecules/Typography';
 import OnboardingWrapper from './wrapper';
-import { Button } from '@/components/ui/button';
-import { Puzzle } from 'lucide-react';
+import HeaderText from './header-text';
 import SubHeaderText from './sub-header-text';
-import CarbonConnectWrapper from '@/app/dashboard/integrations/components/carbon-connect';
 
 type Props = {
   uid: string;
+  userBio: any;
   step: number;
   setStep: (step: number) => void;
 };
 
-export function OnboardingStep5({ uid, step, setStep }: Props) {
+export function OnboardingStep5({ uid, userBio, step, setStep }: Props) {
+  const { toast } = useToast();
+
+  const [bio, setBio] = React.useState<any>({
+    fitness_goals: '',
+    workout_location: '',
+    workout_frequency: '',
+    workout_experience: ''
+  });
   const [loading, setLoading] = React.useState(false);
-  const [
-    isOpenCarbonIntegrations,
-    setIsOpenCarbonIntegrations
-  ] = React.useState(false);
+
+  useEffect(() => {
+    if (userBio?.bio) {
+      setBio(userBio?.bio);
+    }
+  }, [userBio]);
 
   const submit = async () => {
     setLoading(true);
+    try {
+      const res = await saveUserBio(bio);
 
-    updateOnboardingStep(uid, step + 1);
-    setStep(step + 1);
-
+      if (res) {
+        updateOnboardingStep(uid, step + 1);
+        setStep(step + 1);
+      } else {
+        throw new Error('Error saving bio');
+      }
+    } catch (e) {
+      toast({
+        title: 'Something went wrong. Please try again.'
+      });
+    }
     setLoading(false);
   };
 
   return (
     <OnboardingWrapper>
-      <HeaderText>Setup your integrations</HeaderText>
-      <SubHeaderText>
-        Connect to Google Drive, Dropbox, Notion, and I'll automatically listen
-        for updates and changes.
-      </SubHeaderText>
+      <HeaderText>How experienced are you?</HeaderText>
+      <SubHeaderText>Beginner, immmediate, advanced, pro</SubHeaderText>
 
-      <CarbonConnectWrapper
-        uid={uid || ''}
-        open={isOpenCarbonIntegrations}
-        setOpen={setIsOpenCarbonIntegrations}
+      <Textarea
+        placeholder="Advanced"
+        value={bio?.workout_experience}
+        onChange={(e) => {
+          setBio({ ...bio, workout_experience: e.target.value });
+        }}
       />
-
-      <div className="pb-8">
-        <div className="flex flex-row gap-2">
-          <Button
-            variant="default"
-            loading={loading}
-            onClick={() => setIsOpenCarbonIntegrations(true)}
-          >
-            <Puzzle className="w-4 h-4 mr-2" />
-            Connect integrations
-          </Button>
-        </div>
-      </div>
 
       <BottomButtons
         step={step}
