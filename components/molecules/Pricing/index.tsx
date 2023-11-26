@@ -65,7 +65,7 @@ export default function Pricing({
       return router.push('/auth/signin');
     }
     if (subscription) {
-      return router.push('/dashboard/assistant');
+      return router.push('/dashboard/trainer');
     }
 
     try {

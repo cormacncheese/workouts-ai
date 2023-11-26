@@ -42,7 +42,7 @@ export function DashboardMobileMenu() {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <MessageCircle className="mr-2 h-4 w-4" />
-            <Link href="/dashboard/assistant" prefetch passHref legacyBehavior>
+            <Link href="/dashboard/trainer" prefetch passHref legacyBehavior>
               Chat
             </Link>
           </DropdownMenuItem>

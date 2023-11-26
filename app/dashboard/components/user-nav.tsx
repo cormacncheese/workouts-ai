@@ -19,7 +19,7 @@ import { Database } from '@/types/supabase';
 import { User } from '@supabase/supabase-js';
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { Settings, Bookmark } from 'lucide-react';
+import { Settings, UserCircle } from 'lucide-react';
 
 interface Props {
   user: User;
@@ -70,8 +70,8 @@ export function UserNav({ user }: Props) {
             href="/dashboard/settings/profile"
             className="flex flex-row items-center"
           >
-            <Settings className="mr-2 h-4 w-4" />
-            Settings
+            <UserCircle className="mr-2 h-4 w-4" />
+            Profile
           </Link>
 
           {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
@@ -79,11 +79,11 @@ export function UserNav({ user }: Props) {
 
         <DropdownMenuItem className="hover:cursor-pointer">
           <Link
-            href="/dashboard/settings/saved"
+            href="/dashboard/settings/preferences"
             className="flex flex-row items-center"
           >
-            <Bookmark className="mr-2 h-4 w-4" />
-            Saved
+            <Settings className="mr-2 h-4 w-4" />
+            Preferences
           </Link>
         </DropdownMenuItem>
         {/* <DropdownMenuItem className="hover:cursor-pointer">

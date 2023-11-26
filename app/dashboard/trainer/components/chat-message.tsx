@@ -10,8 +10,8 @@ import PulseLoader from '@/components/molecules/PulseLoader';
 import { ChatMessageActions } from './chat-message-actions';
 import useUser from '@/lib/hooks/use-user';
 
-const MaiaChatAvatar =
-  'https://dcsladfmohmhomyxvhzz.supabase.co/storage/v1/object/public/general/logo/zenbase_pfp_small.jpg';
+const ChatAvatar =
+  'https://dorrdxizajloclrfhcth.supabase.co/storage/v1/object/public/web/logo/workouts-ai-pfp.png';
 
 export interface ChatMessageProps {
   message: Message;
@@ -54,7 +54,7 @@ export function ChatMessage({
       >
         <Avatar className="h-8 w-8">
           <AvatarImage
-            src={message.role === 'user' ? avatar : MaiaChatAvatar}
+            src={message.role === 'user' ? avatar : ChatAvatar}
             alt="chat avatar"
           />
           {/* <AvatarFallback>{name.charAt(0) || 'M'}</AvatarFallback> */}

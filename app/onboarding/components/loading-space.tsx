@@ -10,7 +10,7 @@ export function LoadingSpace({}) {
 
   useEffect(() => {
     setTimeout(() => {
-      router.push('/dashboard/assistant');
+      router.push('/dashboard/trainer');
     }, 2000);
   }, []);
 

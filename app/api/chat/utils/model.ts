@@ -33,14 +33,16 @@ export async function getModel({ overRideModel }: Props) {
     proPrice &&
     subscription.prices.id === proPrice.id;
 
-  let model = LLM_MODELS['gpt-3'];
-  if (overRideModel) {
-    model = LLM_MODELS[overRideModel as keyof typeof LLM_MODELS];
-  } else {
-    if (isProActive) {
-      model = LLM_MODELS['gpt-4'];
-    }
-  }
+  // let model = LLM_MODELS['gpt-3'];
+  // if (overRideModel) {
+  //   model = LLM_MODELS[overRideModel as keyof typeof LLM_MODELS];
+  // } else {
+  //   if (isProActive) {
+  //     model = LLM_MODELS['gpt-4'];
+  //   }
+  // }
+
+  const model = LLM_MODELS['gpt-4'];
 
   return new OpenAI({
     modelName: model,

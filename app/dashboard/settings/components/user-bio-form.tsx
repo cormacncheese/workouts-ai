@@ -101,12 +101,6 @@ export default function UserBioForm() {
   } else {
     return (
       <>
-        <div className=" flex flex-row justify-end md:mt-4 md:mb-0 mb-4">
-          <Button variant="default" loading={loading} onClick={handleSave}>
-            Save changes
-          </Button>
-        </div>
-
         <div className="flex md:flex-row flex-col gap-8 py-2">
           <div className="grid w-full gap-1.5 py-2">
             <Label htmlFor="about_you">About you</Label>
@@ -157,6 +151,12 @@ export default function UserBioForm() {
               id="hobbies"
             />
           </div>
+        </div>
+
+        <div className="flex flex-row justify-end md:mt-4 md:mb-0 mb-4">
+          <Button variant="default" loading={loading} onClick={handleSave}>
+            Save changes
+          </Button>
         </div>
       </>
     );

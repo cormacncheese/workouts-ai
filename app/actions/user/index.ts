@@ -160,27 +160,6 @@ export async function updateWebsiteInBusinessBio(
   return data[0];
 }
 
-export async function getUserBusinesses() {
-  const session = await getSession();
-
-  const user = session?.user;
-
-  if (!user) {
-    return null;
-  }
-
-  const { data, error } = await supabase
-    .from('businesses')
-    .select('*')
-    .eq('owner', user.id);
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  return data;
-}
-
 export async function updateTodoInUserBio(todoList: TodoItem[]) {
   const session = await getSession();
 

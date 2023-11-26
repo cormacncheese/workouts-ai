@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
   darkMode: ['class'],
-  content: ['./components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}'],
+  content: [
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+    './content/**/*.{md,mdx}'
+  ],
   theme: {
     container: {
       center: true,
@@ -17,15 +21,10 @@ module.exports = {
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
-        backgroundMuted: 'hsl(var(--background-muted))',
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
-        },
-        primaryMuted: {
-          DEFAULT: 'hsl(var(--primary-muted))',
-          foreground: 'hsl(var(--primary-muted-foreground))'
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -42,12 +41,6 @@ module.exports = {
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))'
-        },
-        brand: {
-          DEFAULT: 'hsl(var(--brand))'
-        },
-        gold: {
-          DEFAULT: 'hsl(var(--gold))'
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',

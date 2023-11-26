@@ -20,8 +20,6 @@ import React from 'react';
 import { messagesAtom } from '@/utils/atoms';
 import { useAtom } from 'jotai';
 import ChatOptions from './chat-options';
-import useBusiness from '@/lib/hooks/use-businesses';
-import useWorkspace from '@/lib/hooks/use-workspace';
 import { isWithinTokenLimit } from '@/utils/token-counter';
 import TokenLimitAlert from './token-limit-alert';
 
@@ -32,8 +30,6 @@ interface Props {
 export default function ChatAndMessages({ chatRef }: Props) {
   const { toast } = useToast();
   const { uid, userData } = useUser();
-  const { businessId, businessData } = useBusiness();
-  const { workspace } = useWorkspace();
 
   const [threadId, setThreadId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,8 +41,6 @@ export default function ChatAndMessages({ chatRef }: Props) {
   const [abortController, setAbortController] = useState<AbortController>();
   const [messages, setMessages] = useAtom(messagesAtom);
   const [isOpenTokenLimitAlert, setIsOpenTokenLimitAlert] = useState(false);
-  const [selectedFileId, setSelectedFileId] = useState<string | null>(null);
-  const [selectedLinkId, setSelectedLinkId] = useState<string | null>(null);
   const [isLiveSearch, setIsLiveSearch] = useState(false);
   const [attachmentsOpen, setAttachmentsOpen] = useState(false);
 
@@ -83,8 +77,8 @@ export default function ChatAndMessages({ chatRef }: Props) {
     ) {
       handleReset();
       return;
-      // if the last message was sent > 60min ago, create new thread
-    } else if (timeDiff > 60 * 60 * 1000) {
+      // if the last message was sent > 8 hours ago, create new thread
+    } else if (timeDiff > 60 * 60 * 1000 * 8) {
       // fetch new if it's been a while
       handleReset();
     } else {
@@ -131,19 +125,22 @@ export default function ChatAndMessages({ chatRef }: Props) {
 
     setMessages((prevMessages) => [...prevMessages, aiResponseMessage]);
 
+    console.log('before');
+
     const response = await fetch('/api/chat/create-intro-message', {
       method: 'POST',
       body: JSON.stringify({
-        workspace: workspace,
-        user_name: userData.full_name,
-        business_name: businessData?.name || ''
+        user_name: userData.full_name
       })
     }).catch((err) => {
+      console.log('fetchNewIntro err: ', err);
       toast({
         title: 'Something went wrong. Please try again.'
       });
       return;
     });
+
+    console.log('INTRO response: ', response);
 
     const textDecoder = new TextDecoder();
     const reader = response?.body?.getReader();
@@ -168,6 +165,8 @@ export default function ChatAndMessages({ chatRef }: Props) {
         return newMessages;
       });
     }
+
+    console.log('INTRO fullNewMessage: ', fullNewMessage);
 
     try {
       if (fullNewMessage) {
@@ -225,9 +224,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
     const response = await fetch('/api/chat/get-suggested-prompts', {
       method: 'POST',
       body: JSON.stringify({
-        history: messages,
-        businessId: businessId,
-        workspace: workspace
+        history: messages
       })
     }).catch((err) => {
       console.log('fetchSuggestedPrompts err: ', err);
@@ -344,19 +341,8 @@ export default function ChatAndMessages({ chatRef }: Props) {
     const minifiedUserData = {
       uid: uid,
       full_name: userData.full_name,
-      bio: userData.bio,
-      instructions: userData.instructions,
-      todo: userData.todo
+      bio: userData.bio
     };
-
-    let minifiedBusinessData = {};
-    if (businessData) {
-      minifiedBusinessData = {
-        todo: businessData.todo,
-        bio: businessData.bio,
-        name: businessData.name
-      };
-    }
 
     try {
       const response = await fetch('/api/chat/send-message', {
@@ -364,12 +350,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
         body: JSON.stringify({
           query,
           user_data: minifiedUserData,
-          business_data: minifiedBusinessData,
           history: messages,
-          businessId: businessId,
-          workspace: workspace,
-          file_id: selectedFileId,
-          link_id: selectedLinkId,
           is_live_search: isLiveSearch
         }),
         signal
@@ -456,6 +437,12 @@ export default function ChatAndMessages({ chatRef }: Props) {
     abortController?.abort();
   };
 
+  const handleGenerateNewWorkout = () => {
+    setQuery('Generate new workout');
+
+    handleSend();
+  };
+
   // TODO - regenerate
   const reload = async () => {
     // console.log('reload');
@@ -483,8 +470,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
               isLoading={isLoading}
               uid={uid || ''}
               threadId={threadId}
-              businessId={businessId || null}
-              workspace={workspace}
+              handleGenerateNewWorkout={handleGenerateNewWorkout}
             />
             <ChatScrollAnchor trackVisibility={isLoading} />
           </div>
@@ -512,10 +498,6 @@ export default function ChatAndMessages({ chatRef }: Props) {
         setMessages={setMessages}
         send={handleSend}
         promptSuggestions={suggestedPrompts}
-        selectedFileId={selectedFileId}
-        setSelectedFileId={setSelectedFileId}
-        selectedLinkId={selectedLinkId}
-        setSelectedLinkId={setSelectedLinkId}
         isLiveSearch={isLiveSearch}
         setIsLiveSearch={setIsLiveSearch}
         attachmentsOpen={attachmentsOpen}

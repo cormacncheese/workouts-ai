@@ -1,59 +1,65 @@
-import { tracer } from '../utils/langSmithClient';
-import { LLMChain } from 'langchain/chains';
-import { PromptTemplate } from 'langchain/prompts';
-import { StreamingTextResponse, LangChainStream } from 'ai';
+import { StreamingTextResponse, OpenAIStream } from 'ai';
 import { metaPrompt } from '@/utils/meta-prompt';
 import { getModel } from '../utils/model';
-import { currentDate, dayOfWeek } from '@/utils/date';
+import OpenAI from 'openai';
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const runtime = 'edge';
-export const dynamic = 'force-dynamic';
-export const revalidate = true;
 
 export async function POST(req: Request) {
   if (req.method === 'POST') {
     try {
-      const { business_name, user_name } = await req.json();
+      const { user_name } = await req.json();
 
-      // Eventually want
-      // - emails synced
-      // - calendar synced
-      // Maybe - user learned, history (pick back up where you left off), etc.
+      const systemMessage = `
+       You are a personal trainer and knolegeable about all things fitness, weightlifting, hypertrophy, etc.
+                        
+        User name: ${user_name}.
 
-      const prompt = PromptTemplate.fromTemplate(`
-          You are a helpful personal assistant and companion. You help me with anything I need.
-                          
-          User name: {user_name}.
+        Meta Prompt: ${metaPrompt}
 
-          Business name: {business_name}. 
+        Great the user like a companion, friend and trainer
+        
+        Use the date to greet the user casually.
+        
+      `;
 
-          Date: {date}. Day of the week: {day_of_week}.
+      // const prompt = PromptTemplate.fromTemplate(`
+      //   You are a personal trainer and knolegeable about all things fitness, weightlifting, hypertrophy, etc.
 
-          Be concise and to the point. Only answer in 1 sentence.
+      //   User name: {user_name}.
 
-          Great the user like a companion, friend and personal assistant.
-          
-          Use the date to greet the user casually
-        `);
+      //   Great the user like a companion, friend and trainer
 
-      const { stream, handlers } = LangChainStream();
+      //   Use the date to greet the user casually
+      // `);
 
-      const model = await getModel({ overRideModel: 'gpt-4' });
+      // const { stream } = LangChainStream();
 
-      const chain = new LLMChain({ llm: model, prompt: prompt });
+      // const model = await getModel({ overRideModel: 'gpt-4' });
 
-      chain.call(
-        {
-          user_name: user_name || '',
-          business_name: business_name || '',
-          date: currentDate,
-          day_of_week: dayOfWeek,
-          metaPrompt: metaPrompt
-        },
-        {
-          callbacks: [tracer, handlers]
-        }
-      );
+      // const chain = new LLMChain({ llm: model, prompt: prompt });
+
+      // chain.call({
+      //   user_name: user_name || '',
+      //   metaPrompt: metaPrompt
+      // });
+
+      const response = await openai.chat.completions.create({
+        model: 'gpt-4-1106-preview',
+        stream: true,
+        messages: [
+          {
+            role: 'system',
+            content: systemMessage
+          }
+        ]
+      });
+
+      const stream = OpenAIStream(response);
+
+      console.log('after chain call: ', stream);
 
       // Respond with the stream
       return new StreamingTextResponse(stream);

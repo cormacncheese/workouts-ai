@@ -7,8 +7,8 @@ const sidebarNavItems = [
     href: '/dashboard/settings/profile'
   },
   {
-    title: 'Saved',
-    href: '/dashboard/settings/saved'
+    title: 'Preferences',
+    href: '/dashboard/settings/preferences'
   }
   //   {
   //     title: 'Account',
@@ -55,7 +55,7 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
         <div className="space-y-0.5">
           <h2 className="text-2xl font-bold tracking-tight">Settings</h2>
           <p className="text-muted-foreground">
-            Manage your Zenbase account settings.
+            Manage your Workouts AI account settings.
           </p>
         </div>
         <Separator className="my-6" />

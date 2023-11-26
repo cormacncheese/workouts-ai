@@ -16,7 +16,7 @@ export default async function SignIn() {
     console.log('userData: ', userData);
 
     if (userData && userData.has_onboarded) {
-      return redirect('/dashboard/assistant');
+      return redirect('/dashboard/trainer');
     } else if (userData) {
       return redirect('/onboarding');
     }

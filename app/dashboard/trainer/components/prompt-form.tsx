@@ -11,7 +11,6 @@ import {
 import { Message } from '@/types/custom';
 import { SendHorizontal } from 'lucide-react';
 import Attachments from './attachments';
-import useWorkspace from '@/lib/hooks/use-workspace';
 
 export interface PromptProps {
   isLoading: boolean;
@@ -23,10 +22,6 @@ export interface PromptProps {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   send: any;
-  selectedFileId: string | null;
-  setSelectedFileId: (id: string) => void;
-  selectedLinkId: string | null;
-  setSelectedLinkId: (id: string) => void;
   isLiveSearch: boolean;
   setIsLiveSearch: React.Dispatch<React.SetStateAction<boolean>>;
   attachmentsOpen: boolean;
@@ -44,18 +39,12 @@ export function PromptForm({
   query,
   setQuery,
   send,
-  selectedFileId,
-  setSelectedFileId,
-  selectedLinkId,
-  setSelectedLinkId,
   isLiveSearch,
   setIsLiveSearch,
   attachmentsOpen,
   setAttachmentsOpen,
   uid
 }: PromptProps) {
-  const { workspaceId } = useWorkspace();
-
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
   React.useEffect(() => {
@@ -87,11 +76,6 @@ export function PromptForm({
           isOpen={attachmentsOpen}
           setIsOpen={setAttachmentsOpen}
           uid={uid || ''}
-          workspaceId={workspaceId}
-          selectedFileId={selectedFileId}
-          setSelectedFileId={setSelectedFileId}
-          selectedLinkId={selectedLinkId}
-          setSelectedLinkId={setSelectedLinkId}
           isLiveSearch={isLiveSearch}
           setIsLiveSearch={setIsLiveSearch}
         />

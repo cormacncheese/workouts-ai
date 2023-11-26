@@ -18,10 +18,6 @@ export interface ChatPanelProps {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   send: any;
   promptSuggestions: any;
-  selectedFileId: string | null;
-  setSelectedFileId: (id: string) => void;
-  selectedLinkId: string | null;
-  setSelectedLinkId: (id: string) => void;
   isLiveSearch: boolean;
   setIsLiveSearch: React.Dispatch<React.SetStateAction<boolean>>;
   attachmentsOpen: boolean;
@@ -43,10 +39,6 @@ export function ChatPanel({
   setMessages,
   send,
   promptSuggestions,
-  selectedFileId,
-  setSelectedFileId,
-  selectedLinkId,
-  setSelectedLinkId,
   isLiveSearch,
   setIsLiveSearch,
   attachmentsOpen,
@@ -117,10 +109,6 @@ export function ChatPanel({
             messages={messages}
             setMessages={setMessages}
             send={send}
-            selectedFileId={selectedFileId}
-            setSelectedFileId={setSelectedFileId}
-            selectedLinkId={selectedLinkId}
-            setSelectedLinkId={setSelectedLinkId}
             isLiveSearch={isLiveSearch}
             setIsLiveSearch={setIsLiveSearch}
             attachmentsOpen={attachmentsOpen}

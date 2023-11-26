@@ -3,8 +3,8 @@ import DashboardMenu from '@/app/dashboard/components/dashboard-menu';
 import { DashboardMobileMenu } from './dashboard-menu-mobile';
 import Logo from '@/components/icons/Logo';
 import Link from 'next/link';
-import WorkspaceDropdown from '@/app/dashboard/components/workspace-dropdown';
 import PaywallWithButton from '@/app/dashboard/components/paywall-with-button';
+import Typography from '@/components/molecules/Typography';
 
 export default async function DashboardNavbar() {
   const supabase = createServerSupabaseClient();
@@ -16,15 +16,29 @@ export default async function DashboardNavbar() {
   const renderLogo = () => {
     return user ? (
       <Link
-        href="/dashboard/assistant"
+        href="/dashboard/trainer"
         aria-label="Dashboard"
         className="flex items-center"
       >
         <Logo />
+        <Typography
+          size="3xl"
+          fontWeight="normal"
+          className="text-slate-300 ml-4"
+        >
+          Workouts AI
+        </Typography>
       </Link>
     ) : (
       <Link href="/" aria-label="Logo" className="flex items-center">
         <Logo />
+        <Typography
+          size="3xl"
+          fontWeight="normal"
+          className="text-slate-300 ml-4"
+        >
+          Workouts AI
+        </Typography>
       </Link>
     );
   };
@@ -35,8 +49,8 @@ export default async function DashboardNavbar() {
         {renderLogo()}
 
         <div className="flex gap-4">
-          <PaywallWithButton />
-          <WorkspaceDropdown />
+          {/* <PaywallWithButton /> */}
+          {/* <WorkspaceDropdown /> */}
           <DashboardMobileMenu />
         </div>
       </div>

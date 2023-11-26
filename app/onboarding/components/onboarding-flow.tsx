@@ -16,7 +16,7 @@ export default function OnboardingFlow() {
 
   useEffect(() => {
     if (onboardingStep === ONBOARDING_STEPS.length) {
-      router.push('/dashboard/assistant');
+      router.push('/dashboard/trainer');
     }
     setStep(onboardingStep);
   }, [onboardingStep]);
