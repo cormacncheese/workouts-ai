@@ -1,4 +1,3 @@
-import { tracer } from '../utils/langSmithClient';
 import { LLMChain } from 'langchain/chains';
 import { getModel } from '../utils/model';
 import { PromptTemplate } from 'langchain/prompts';
@@ -24,12 +23,9 @@ export default async function OptimizeQueryToSearch({ query }: Props) {
 
     const chain = new LLMChain({ llm: model, prompt: prompt });
 
-    const response = await chain.call(
-      {
-        query: query
-      },
-      { callbacks: [tracer] }
-    );
+    const response = await chain.call({
+      query: query
+    });
 
     const reply = response?.text?.trim();
 

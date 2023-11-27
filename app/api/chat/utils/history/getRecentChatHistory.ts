@@ -1,12 +1,12 @@
 import { Message } from '@/types/custom';
-import { cleanHistory } from '@/app/api/chat/utils/cleanHistory';
+import { formatHistory } from '@/app/api/chat/utils/history/formatHistory';
 
 interface Props {
   history: Message[];
 }
 
 export default async function GetRecentChatHistory({ history }: Props) {
-  const cleanedMessages = cleanHistory(history);
+  const cleanedMessages = formatHistory(history);
 
   const stringifiedMessages = JSON.stringify(cleanedMessages);
 

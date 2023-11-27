@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Input } from '@/components/ui/input';
 import { updateUserFullName, updateOnboardingStep } from '@/app/actions/user';
 import BottomButtons from './bottom-buttons';
@@ -10,29 +10,17 @@ import HeaderText from './header-text';
 
 type Props = {
   uid: string;
-  userData: any;
-  userBio: any;
+  bio: any;
+  setBio: (bio: any) => void;
   step: number;
   setStep: (step: number) => void;
 };
 
-export function OnboardingStep1({
-  uid,
-  userData,
-  userBio,
-  step,
-  setStep
-}: Props) {
+export function OnboardingStep1({ uid, step, setStep }: Props) {
   const { toast } = useToast();
 
   const [name, setName] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-
-  useEffect(() => {
-    if (userData?.full_name) {
-      setName(userData?.full_name);
-    }
-  }, [userData]);
 
   const submit = async () => {
     setLoading(true);

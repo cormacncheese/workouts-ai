@@ -1,5 +1,5 @@
 import { Message } from '@/types/custom';
-import { cleanHistory } from '@/app/api/chat/utils/cleanHistory';
+import { formatHistory } from '@/app/api/chat/utils/history/formatHistory';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { ScoreThresholdRetriever } from 'langchain/retrievers/score_threshold';
@@ -13,7 +13,7 @@ export default async function SimilaritySearchChatHistory({
   query,
   history
 }: Props) {
-  const cleanedMessages = cleanHistory(history);
+  const cleanedMessages = formatHistory(history);
 
   // Convert your messages into texts for the vector store
   const texts = cleanedMessages.map(

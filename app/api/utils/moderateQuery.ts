@@ -1,7 +1,5 @@
 import { OpenAIModerationChain } from 'langchain/chains';
 
-import { tracer } from '../chat/utils/langSmithClient';
-
 export async function moderateQuery(query: string) {
   try {
     // Create a new instance of the OpenAIModerationChain
@@ -10,12 +8,9 @@ export async function moderateQuery(query: string) {
     });
 
     // Send the user's input to the moderation chain and wait for the result
-    const { output: badResult, results } = await moderation.call(
-      {
-        input: query
-      },
-      { callbacks: [tracer] }
-    );
+    const { output: badResult, results } = await moderation.call({
+      input: query
+    });
 
     // You can view the category scores of each category. This is useful when dealing with non-english languages, as it allows you to have a more granular control over moderation.
     if (results[0].flagged) {

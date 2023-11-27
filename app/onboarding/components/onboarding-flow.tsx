@@ -13,6 +13,13 @@ export default function OnboardingFlow() {
   const { uid, onboardingStep, userData, userBio } = useUser();
 
   const [step, setStep] = React.useState(onboardingStep);
+  const [bio, setBio] = React.useState<any>({
+    fitness_goals: '',
+    workout_location: '',
+    workout_frequency: '',
+    workout_experience: '',
+    workout_intensity: ''
+  });
 
   useEffect(() => {
     if (onboardingStep === ONBOARDING_STEPS.length) {
@@ -29,6 +36,12 @@ export default function OnboardingFlow() {
     }
   }, [step]);
 
+  useEffect(() => {
+    if (userBio?.bio) {
+      setBio(userBio?.bio);
+    }
+  }, [userBio]);
+
   return (
     <div className="w-full flex justify-center">
       {step === ONBOARDING_STEPS.length ? (
@@ -42,8 +55,8 @@ export default function OnboardingFlow() {
 
           <CurrentStep
             uid={uid}
-            userData={userData}
-            userBio={userBio}
+            bio={bio}
+            setBio={setBio}
             step={step}
             setStep={setStep}
           />

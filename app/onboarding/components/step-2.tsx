@@ -6,43 +6,22 @@ import BottomButtons from './bottom-buttons';
 import { useToast } from '@/components/ui/use-toast';
 import { Textarea } from '@/components/ui/textarea';
 import { saveUserBio } from '@/app/actions/user';
-import Typography from '@/components/molecules/Typography';
 import OnboardingWrapper from './wrapper';
 import HeaderText from './header-text';
 import SubHeaderText from './sub-header-text';
 
 type Props = {
   uid: string;
-  userData: any;
-  userBio: any;
+  bio: any;
+  setBio: (bio: any) => void;
   step: number;
   setStep: (step: number) => void;
 };
 
-export function OnboardingStep2({
-  uid,
-  userData,
-  userBio,
-  step,
-  setStep
-}: Props) {
+export function OnboardingStep2({ uid, bio, setBio, step, setStep }: Props) {
   const { toast } = useToast();
 
-  const [bio, setBio] = React.useState<any>({
-    fitness_goals: '',
-    workout_location: '',
-    workout_frequency: '',
-    workout_duration: '',
-    workout_experience: '',
-    workout_intensity: ''
-  });
   const [loading, setLoading] = React.useState(false);
-
-  useEffect(() => {
-    if (userBio?.bio) {
-      setBio(userBio?.bio);
-    }
-  }, [userBio]);
 
   const submit = async () => {
     setLoading(true);

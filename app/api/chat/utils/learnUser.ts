@@ -1,5 +1,4 @@
 import { PromptTemplate } from 'langchain/prompts';
-import { tracer } from '../utils/langSmithClient';
 import { LLMChain } from 'langchain/chains';
 import { getModel } from '../utils/model';
 import { addToLearned } from './addToLearned';
@@ -47,13 +46,10 @@ export async function learnUser({
   try {
     const chain = new LLMChain({ llm: model, prompt: prompt });
 
-    const response = await chain.call(
-      {
-        query: query,
-        messageHistory: messageHistory
-      },
-      { callbacks: [tracer] }
-    );
+    const response = await chain.call({
+      query: query,
+      messageHistory: messageHistory
+    });
 
     const reply = response?.text?.trim();
 

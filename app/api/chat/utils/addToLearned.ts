@@ -7,7 +7,6 @@ import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import CreateDocsFromText from './createDocsFromText';
 import { getModel } from './model';
 import { PromptTemplate } from 'langchain/prompts';
-import { tracer } from '../utils/langSmithClient';
 import { LLMChain } from 'langchain/chains';
 import removeDocumentsWithIds from '../../embed/utils/removeDocumentsWithIds';
 import addDocsToSupabase from '../../embed/utils/addDocsToSupabase';
@@ -99,13 +98,10 @@ export async function addToLearned({ uid, businessId, information }: Props) {
 
       const chain = new LLMChain({ llm: model, prompt: prompt });
 
-      const response = await chain.call(
-        {
-          existing: existingInformation,
-          new_information: information
-        },
-        { callbacks: [tracer] }
-      );
+      const response = await chain.call({
+        existing: existingInformation,
+        new_information: information
+      });
 
       const reply = response?.text?.trim();
 

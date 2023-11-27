@@ -87,7 +87,7 @@ export function PromptForm({
         rows={1}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="How can I help?"
+        placeholder="Let's get going!"
         onKeyDown={handleKeyPress}
         spellCheck={false}
         className="min-h-[60px] w-full resize-none bg-muted px-4 pr-20 pl-10 py-[1.3rem] shadow-lg focus-within:outline-none sm:text-sm"

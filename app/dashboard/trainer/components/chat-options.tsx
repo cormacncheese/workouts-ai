@@ -1,13 +1,7 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
-import { MoreHorizontal } from 'lucide-react';
 import { HistorySheet } from './history-sheet';
 import { useState } from 'react';
 import { Plus, History } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   handleReset: () => void;
@@ -19,13 +13,25 @@ export default function ChatOptions({ handleReset, setThreadId }: Props) {
 
   return (
     <div className="sticky justify-end flex top-0 right-0 md:px-0 px-4 z-10">
+      <div className="flex flex-row gap-2">
+        <Button variant="outline" onClick={handleReset}>
+          <Plus className="mr-2 w-4 h-4" />
+          New chat
+        </Button>
+
+        <Button variant="outline" onClick={() => setIsHistoryOpen(true)}>
+          <History className="mr-2 w-4 h-4" />
+          History
+        </Button>
+      </div>
+
       <HistorySheet
         setThreadId={setThreadId}
         isOpen={isHistoryOpen}
         setIsOpen={setIsHistoryOpen}
       />
 
-      <DropdownMenu>
+      {/* <DropdownMenu>
         <DropdownMenuTrigger className="md:w-40 flex justify-end outline-none">
           <MoreHorizontal />
         </DropdownMenuTrigger>
@@ -45,7 +51,7 @@ export default function ChatOptions({ handleReset, setThreadId }: Props) {
             History
           </DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> */}
     </div>
   );
 }

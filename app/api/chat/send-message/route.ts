@@ -6,17 +6,7 @@ export const runtime = 'edge';
 
 export async function POST(req: Request) {
   if (req.method === 'POST') {
-    const {
-      query,
-      user_data,
-      business_data,
-      history,
-      businessId,
-      workspace,
-      file_id,
-      link_id,
-      is_live_search
-    } = await req.json();
+    const { query, user_data, history, is_live_search } = await req.json();
 
     try {
       // First moderate
@@ -25,20 +15,13 @@ export async function POST(req: Request) {
         return moderationResult;
       }
 
-      // Make query
-      const { stream, handlers } = LangChainStream();
+      console.log('send-message user_data: ', user_data);
 
-      await makeMessageChain({
+      const stream = await makeMessageChain({
         query,
         user_data,
-        business_data,
         history,
-        businessId,
-        workspace,
-        file_id,
-        link_id,
-        is_live_search,
-        handlers
+        is_live_search
       });
 
       // Respond with the stream

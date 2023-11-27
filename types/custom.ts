@@ -71,3 +71,8 @@ export interface SubscriptionWithProduct extends Subscription {
 export interface ExtendedDocument extends Document {
   pageContent: string;
 }
+
+export type OpenAIMessage = {
+  role: string;
+  content: string;
+};

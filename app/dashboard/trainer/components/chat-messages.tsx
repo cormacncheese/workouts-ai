@@ -257,20 +257,22 @@ export default function ChatAndMessages({ chatRef }: Props) {
     return;
   };
 
-  const handleSend = async () => {
+  const handleSend = async (query_?: string) => {
     setSuggestedPrompts([]);
     setIsLoading(true);
 
+    const userMessage = query_ || query;
+
+    setQuery('');
+
     // first check token amount
-    const isWithinLimit = await isWithinTokenLimit({ text: query });
+    const isWithinLimit = await isWithinTokenLimit({ text: userMessage });
     if (!isWithinLimit) {
       setIsOpenTokenLimitAlert(true);
       return false;
     }
 
     let threadId_ = threadId;
-
-    setQuery('');
 
     const fillerUserMessage: Message = {
       id:
@@ -279,7 +281,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
       uid: uid,
       thread_id: threadId || '',
       role: 'user',
-      content: query,
+      content: userMessage,
       created_at: new Date().toISOString()
     };
 
@@ -303,7 +305,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
     let queryData: any;
     // save query to existing thread
     if (threadId_) {
-      queryData = await addMessageToThread(threadId_, query, 'user');
+      queryData = await addMessageToThread(threadId_, userMessage, 'user');
     } else {
       // create a new thread and save the message, then set the threadId
       const threadResult = await createNewThread();
@@ -321,7 +323,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
       threadId_ = thread.id;
       setThreadId(threadId_);
 
-      queryData = await addMessageToThread(threadId_, query, 'user');
+      queryData = await addMessageToThread(threadId_, userMessage, 'user');
     }
 
     // then replace the filler user message with the saved message
@@ -348,7 +350,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
       const response = await fetch('/api/chat/send-message', {
         method: 'POST',
         body: JSON.stringify({
-          query,
+          query: userMessage,
           user_data: minifiedUserData,
           history: messages,
           is_live_search: isLiveSearch
@@ -400,7 +402,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
       }
     }
 
-    fetchSuggestedPrompts();
+    // fetchSuggestedPrompts();
 
     try {
       if (!fullNewMessage) {
@@ -438,9 +440,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
   };
 
   const handleGenerateNewWorkout = () => {
-    setQuery('Generate new workout');
-
-    handleSend();
+    handleSend('Generate new workout');
   };
 
   // TODO - regenerate

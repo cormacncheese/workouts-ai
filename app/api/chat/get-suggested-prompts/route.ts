@@ -1,9 +1,8 @@
-import { tracer } from '../utils/langSmithClient';
 import { LLMChain } from 'langchain/chains';
 import { PromptTemplate } from 'langchain/prompts';
 import { getModel } from '../utils/model';
 import { currentDate, dayOfWeek } from '@/utils/date';
-import GetRecentChatHistory from '@/app/api/chat/utils/getRecentChatHistory';
+import GetRecentChatHistory from '../utils/history/getRecentChatHistory';
 
 export const runtime = 'edge';
 
@@ -49,9 +48,7 @@ export async function POST(req: Request) {
           day_of_week: dayOfWeek,
           history: stringifiedHistory
         },
-        {
-          callbacks: [tracer]
-        }
+        {}
       );
 
       const reply = response?.text?.trim();

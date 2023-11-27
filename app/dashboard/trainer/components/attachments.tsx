@@ -6,24 +6,9 @@ import {
   PopoverTrigger
 } from '@/components/ui/popover';
 import { buttonVariants } from '@/components/ui/button';
-import {
-  Check,
-  Link,
-  FileText,
-  Upload,
-  FolderClosed,
-  Paperclip,
-  ChevronLeft,
-  Link2Off
-} from 'lucide-react';
+import { Paperclip } from 'lucide-react';
 import cn from 'classnames';
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import { getFiles } from '@/app/actions/files';
-import useSWR from 'swr';
-import Typography from '@/components/molecules/Typography';
-import CarbonConnectUrl from './carbon-connect-url';
-import CarbonConnectFiles from './carbon-connect-files';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import PaywallDialog from '@/app/dashboard/components/paywall-dialog';

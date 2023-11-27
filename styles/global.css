@@ -44,51 +44,16 @@ a {
   text-decoration: none !important;
 }
 
-/* Carbon Connect */
-.cc-bg-white {
-  background-color: #000 !important;
-}
-
-.cc-w-full .cc-h-12 {
-  background-color: #fff !important;
-  color: #000 !important;
-}
-
-.cc-text-base {
+h3 {
   color: #fff !important;
 }
 
-.cc-flex blockquote,
-.cc-flex dl,
-.cc-flex dd,
-.cc-flex h1,
-.cc-flex h2,
-.cc-flex h3,
-.cc-flex h4,
-.cc-flex h5,
-.cc-flex h6,
-.cc-flex hr,
-.cc-flex figure,
-.cc-flex p,
-.cc-flex pre {
+p {
   color: #fff !important;
 }
 
-button.cc-flex-row {
-  background-color: #fff !important;
-  color: #000 !important;
-}
-
-.cc-flex-row p {
-  color: #000 !important;
-}
-
-.cc-text-gray-400.cc-font-normal {
-  color: #fff !important;
-}
-
-.cc-border-4 {
-  border-width: 1px !important;
+.prose
+  :where(strong):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   color: #fff !important;
 }
 
