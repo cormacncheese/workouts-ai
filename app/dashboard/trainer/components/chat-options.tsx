@@ -20,7 +20,7 @@ export default function ChatOptions({ handleReset, setThreadId }: Props) {
 
   return (
     <div className="sticky justify-end flex top-0 right-0 md:px-0 px-4 z-10">
-      <div className=" flex-row gap-2 hidden md:block">
+      <div className=" flex-row gap-2 hidden md:flex">
         <Button variant="outline" onClick={handleReset}>
           <Plus className="mr-2 w-4 h-4" />
           New chat
@@ -38,7 +38,7 @@ export default function ChatOptions({ handleReset, setThreadId }: Props) {
         setIsOpen={setIsHistoryOpen}
       />
 
-      <div className="">
+      <div className="block md:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger className="md:w-40 flex justify-end outline-none">
             <MoreHorizontal />

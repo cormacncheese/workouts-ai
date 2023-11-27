@@ -22,7 +22,7 @@ const Logo = ({ className = '', ...props }) => (
       alt="Workouts AI Logo"
       width={400}
       height={40}
-      className="w-full h-8 "
+      className="w-40 h-8 "
       {...props}
     />
   </>
