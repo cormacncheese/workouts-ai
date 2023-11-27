@@ -15,13 +15,6 @@ export default function AuthLayout({
         <div className="">
           <Link href="/" aria-label="Logo" className="flex items-center">
             <Logo />
-            <Typography
-              size="3xl"
-              fontWeight="normal"
-              className="text-slate-300 ml-4"
-            >
-              Workouts AI
-            </Typography>
           </Link>
         </div>
 

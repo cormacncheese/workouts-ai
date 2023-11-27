@@ -13,7 +13,6 @@ import cn from 'classnames';
 import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
 import { ROUTES } from '@/lib/constants/routes';
 import { usePathname } from 'next/navigation';
-import PaywallWithButton from './paywall-with-button';
 import { FolderOpen, MessageCircle, GanttChartSquare } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -65,8 +64,6 @@ export default function DashboardMenu({ user }: Props) {
         </NavigationMenuList>
 
         <NavigationMenuList className="flex gap-4">
-          {/* <PaywallWithButton /> */}
-
           {user && (
             <NavigationMenuItem>
               <UserNav user={user} />

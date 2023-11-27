@@ -30,13 +30,6 @@ export default async function Navbar() {
           className="flex flex-row gap-2 items-center"
         >
           <Logo />
-          <Typography
-            size="3xl"
-            fontWeight="normal"
-            className="text-slate-300 ml-4"
-          >
-            Workouts AI
-          </Typography>
         </Link>
 
         <HomeMenu />

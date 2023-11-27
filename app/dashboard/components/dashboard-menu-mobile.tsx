@@ -14,12 +14,11 @@ import {
   Menu,
   X,
   MessageCircle,
-  Lightbulb,
+  GanttChartSquare,
   LifeBuoy,
-  Puzzle,
-  FolderOpen,
   Settings,
-  Bookmark
+  Bookmark,
+  User
 } from 'lucide-react';
 import React from 'react';
 import SignOutButton from './SignOutButton';
@@ -34,65 +33,37 @@ export function DashboardMobileMenu() {
       }}
     >
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button variant="ghost">
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuContent className="w-56 " align="end">
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <MessageCircle className="mr-2 h-4 w-4" />
             <Link href="/dashboard/trainer" prefetch passHref legacyBehavior>
-              Chat
+              Trainer
             </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem>
-            <FolderOpen className="mr-2 h-4 w-4" />
-            <Link href="/dashboard/files" prefetch passHref legacyBehavior>
-              Files
+            <GanttChartSquare className="mr-2 h-4 w-4" />
+            <Link href="/dashboard/saved" prefetch passHref legacyBehavior>
+              Saved Workouts
             </Link>
           </DropdownMenuItem>
-
-          <DropdownMenuItem>
-            <Puzzle className="mr-2 h-4 w-4" />
-            <Link
-              href="/dashboard/integrations"
-              prefetch
-              passHref
-              legacyBehavior
-            >
-              Integrations
-            </Link>
-          </DropdownMenuItem>
-
-          {/* <DropdownMenuItem>
-            <ListTodo className="mr-2 h-4 w-4" />
-            <Link href="/dashboard/todo" prefetch passHref legacyBehavior>
-              Todo
-            </Link>
-          </DropdownMenuItem> */}
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem>
-          <Settings className="mr-2 h-4 w-4" />
+          <User className="mr-2 h-4 w-4" />
           <Link href="/dashboard/settings/profile">Account</Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem>
-          <Bookmark className="mr-2 h-4 w-4" />
-          <Link href="/dashboard/settings/saved">Saved</Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem
-          onClick={() => {
-            window.open('https://discord.gg/mn9Pfb5cWx', '_blank');
-          }}
-        >
-          <LifeBuoy className="mr-2 h-4 w-4" />
-          <span>Support</span>
+          <Settings className="mr-2 h-4 w-4" />
+          <Link href="/dashboard/settings/preferences">Preferences</Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />

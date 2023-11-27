@@ -21,31 +21,17 @@ export default async function DashboardNavbar() {
         className="flex items-center"
       >
         <Logo />
-        <Typography
-          size="3xl"
-          fontWeight="normal"
-          className="text-slate-300 ml-4"
-        >
-          Workouts AI
-        </Typography>
       </Link>
     ) : (
       <Link href="/" aria-label="Logo" className="flex items-center">
         <Logo />
-        <Typography
-          size="3xl"
-          fontWeight="normal"
-          className="text-slate-300 ml-4"
-        >
-          Workouts AI
-        </Typography>
       </Link>
     );
   };
 
   return (
     <>
-      <div className="md:hidden flex px-4 justify-between flex-row items-center sticky top-0 bg-black z-20">
+      <div className="md:hidden flex px-4 py-1 justify-between flex-row items-center sticky top-0 bg-black z-20">
         {renderLogo()}
 
         <div className="flex gap-4">
