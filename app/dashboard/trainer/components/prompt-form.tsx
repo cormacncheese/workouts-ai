@@ -68,7 +68,7 @@ export function PromptForm({
 
   return (
     <div
-      className="relative flex max-h-60 w-full grow flex-col overflow-hidden sm:rounded-md sm:border "
+      className="relative flex max-h-60 w-full grow flex-col overflow-hidden sm:rounded-md sm:border rounded-md"
       style={{ boxShadow: '0 0 5px 2px rgba(0, 0, 0, 0.2)' }}
     >
       <div className="absolute left-0 top-4 ">
