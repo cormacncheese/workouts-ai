@@ -68,6 +68,12 @@ export default function ChatAndMessages({ chatRef }: Props) {
 
     const timeDiff = now.getTime() - mostRecentThreadTime.getTime();
 
+    // check if the day of now isn't the same day as mostRecentThreadTime
+    const isSameDay =
+      now.getDate() === mostRecentThreadTime.getDate() &&
+      now.getMonth() === mostRecentThreadTime.getMonth() &&
+      now.getFullYear() === mostRecentThreadTime.getFullYear();
+
     // check if last message was sent more than an hour ago
     // if no history, create new thread
     if (
@@ -78,7 +84,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
       handleReset();
       return;
       // if the last message was sent > 8 hours ago, create new thread
-    } else if (timeDiff > 60 * 60 * 1000 * 8) {
+    } else if (!isSameDay) {
       // fetch new if it's been a while
       handleReset();
     } else {
@@ -440,7 +446,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
   };
 
   const handleGenerateNewWorkout = () => {
-    handleSend('Generate new workout');
+    handleSend('Generate new workout for today');
   };
 
   // TODO - regenerate

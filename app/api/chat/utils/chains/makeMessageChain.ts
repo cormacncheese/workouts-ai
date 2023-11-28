@@ -77,6 +77,8 @@ export default async function makeMessageChain({
     My name: ${user_data?.full_name}. Only greet me with my name when applicable, do not use it every message.
 
     Prioritize data from User preferences when possible.
+
+    Respond in a personal way like a companion.
   `;
 
   const formattedHistory = (await formatHistory(history)) as any;

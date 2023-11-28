@@ -38,9 +38,7 @@ export function ChatMessage({
 
   return (
     <div
-      className={cn('group relative mb-4 flex items-start md:-ml-12 ', {
-        'flex-row-reverse': message.role === 'user'
-      })}
+      className={cn('group relative mb-12 flex items-start md:-ml-12')}
       {...props}
     >
       <div
@@ -72,15 +70,21 @@ export function ChatMessage({
               className={cn(
                 'prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 text-primary  md:text-lg text-sm',
                 {
-                  'text-right !text-primaryMuted-foreground mr-2':
-                    message.role === 'user'
+                  '!text-primaryMuted mr-2': message.role === 'user'
                 }
               )}
               remarkPlugins={[remarkGfm, remarkMath]}
               components={{
                 p({ children }) {
                   return (
-                    <Typography size="base" fontWeight="normal">
+                    <Typography
+                      size="base"
+                      fontWeight="normal"
+                      className={cn({
+                        '!text-primaryMuted-foreground mr-2':
+                          message.role === 'user'
+                      })}
+                    >
                       {children}
                     </Typography>
                   );
