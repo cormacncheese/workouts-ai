@@ -10,7 +10,7 @@ export default function DashboardLayout({
     <section>
       <DashboardNavbar />
 
-      <div className="bg-backgroundMuted height-screen-helper h-[calc(100dvh)] md:px-8 py-4">
+      <div className="bg-backgroundMuted h-full height-screen-helper md:px-8 py-4">
         {/* <HeaderTitle /> */}
         {children}
       </div>

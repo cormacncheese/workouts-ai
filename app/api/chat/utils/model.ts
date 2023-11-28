@@ -1,9 +1,6 @@
 import { OpenAI } from 'langchain/llms/openai';
-import {
-  getUserId,
-  getSubscription,
-  getActiveProductsWithPrices
-} from '@/app/api/actions/user';
+import { getUserId } from '@/app/api/actions/user';
+import { determineModel } from '@/app/api/chat/utils/determineModel';
 
 export const LLM_MODELS = {
   'gpt-3': 'gpt-3.5-turbo-16k',
@@ -16,33 +13,9 @@ type Props = {
 };
 
 export async function getModel({ overRideModel }: Props) {
-  const [products, subscription, uid] = await Promise.all([
-    getActiveProductsWithPrices(),
-    getSubscription(),
-    getUserId()
-  ]);
+  const [uid] = await Promise.all([getUserId()]);
 
-  const proProduct = products.find((product: any) => product.name === 'Pro');
-
-  const proPrice = proProduct?.prices[0];
-
-  const isProActive =
-    subscription &&
-    subscription.status === 'active' &&
-    subscription.prices &&
-    proPrice &&
-    subscription.prices.id === proPrice.id;
-
-  // let model = LLM_MODELS['gpt-3'];
-  // if (overRideModel) {
-  //   model = LLM_MODELS[overRideModel as keyof typeof LLM_MODELS];
-  // } else {
-  //   if (isProActive) {
-  //     model = LLM_MODELS['gpt-4'];
-  //   }
-  // }
-
-  const model = LLM_MODELS['gpt-4'];
+  const model = await determineModel({ overRideModel });
 
   return new OpenAI({
     modelName: model,

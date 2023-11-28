@@ -7,7 +7,7 @@ import { CSPostHogProvider } from './providers';
 
 export const dynamic = 'force-dynamic';
 
-import 'styles/global.css';
+import './globals.css';
 
 const meta = {
   title: 'Workouts AI',
@@ -86,7 +86,7 @@ export default function RootLayout({
             <SupabaseProvider>
               <main
                 id="skip"
-                className="h-[calc(100dvh)] h-screen-helper !dark:bg-black"
+                className="h-[calc(100dvh)] h-screen-helper max-h-screen !dark:bg-black"
               >
                 {children}
               </main>

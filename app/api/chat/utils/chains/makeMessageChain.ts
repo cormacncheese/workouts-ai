@@ -8,6 +8,7 @@ import { openai } from '@/app/api/chat/utils/getOpenAI';
 import { StreamingTextResponse, OpenAIStream } from 'ai';
 import { formatHistory } from '@/app/api/chat/utils/history/formatHistory';
 import { Message, OpenAIMessage } from '@/types/custom';
+import { determineModel } from '@/app/api/chat/utils/determineModel';
 
 type Props = {
   query: string;
@@ -23,8 +24,6 @@ export default async function makeMessageChain({
   is_live_search
 }: Props) {
   let prompt;
-
-  const model = await getModel({});
 
   const name = user_data.full_name;
   const uid = user_data.uid;
@@ -106,8 +105,10 @@ export default async function makeMessageChain({
 
   formattedHistory.push(newMessage);
 
+  const model = await determineModel({});
+
   const response = await openai.chat.completions.create({
-    model: 'gpt-4-1106-preview',
+    model: model,
     stream: true,
     messages: formattedHistory
   });

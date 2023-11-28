@@ -264,10 +264,16 @@ export default function ChatAndMessages({ chatRef }: Props) {
   };
 
   const handleSend = async (query_?: string) => {
+    console.log('handleSend');
+
     setSuggestedPrompts([]);
     setIsLoading(true);
 
+    console.log('query: ', query);
+
     const userMessage = query_ || query;
+
+    console.log('userMessage: ', userMessage);
 
     setQuery('');
 
@@ -292,6 +298,8 @@ export default function ChatAndMessages({ chatRef }: Props) {
     };
 
     setMessages((prevMessages) => [...prevMessages, fillerUserMessage]);
+
+    console.log('fillerUserMessage: ', fillerUserMessage);
 
     // AI filler message
     const aiResponseMessage: Message = {
@@ -465,7 +473,7 @@ export default function ChatAndMessages({ chatRef }: Props) {
         setIsOpen={setIsOpenTokenLimitAlert}
       />
 
-      <div className={cn('md:pb-[200px] pb-[140px] relative')}>
+      <div className={cn('md:pb-[200px] pb-[140px] relative max-h-[80ch')}>
         <ChatOptions handleReset={handleReset} setThreadId={setThreadId} />
 
         <div>

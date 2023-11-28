@@ -16,7 +16,7 @@ export default function Assistant() {
 
   return (
     <div
-      className="relative bg-backgroundMuted h-full overflow-y-scroll max-h-screen"
+      className="relative bg-backgroundMuted h-screen-helper"
       ref={chatContainerRef}
     >
       <ChatAndMessages chatRef={chatRef} />

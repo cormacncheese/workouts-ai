@@ -100,10 +100,10 @@ export function PromptForm({
               <Button
                 type="submit"
                 size="icon"
-                onClick={send}
+                onClick={() => send()}
                 disabled={isLoading || query === ''}
               >
-                <SendHorizontal />
+                <SendHorizontal className="rounded-md" />
                 <span className="sr-only">Send message</span>
               </Button>
             </TooltipTrigger>
