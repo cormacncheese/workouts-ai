@@ -45,11 +45,14 @@ export function OnboardingStep4({ uid, bio, setBio, step, setStep }: Props) {
 
   return (
     <OnboardingWrapper>
-      <HeaderText>How many days a week do you workout?</HeaderText>
-      <SubHeaderText>1-7 days, 1-3 times a day</SubHeaderText>
+      <HeaderText>What's your workout schedule.</HeaderText>
+      <SubHeaderText>
+        Enter what muscles you workout each day. Example: Monday: legs, Tuesday:
+        Chest/Triceps, etc.
+      </SubHeaderText>
 
       <Textarea
-        placeholder="6 days, once a day"
+        placeholder="Monday: legs, Tuesday:  Chest/Triceps, Wednesday: Back/Biceps, Thursday: Shoulders, Friday: Legs, Saturday: Chest/Triceps, Sunday: Back/Biceps"
         value={bio?.workout_frequency}
         onChange={(e) => {
           setBio({ ...bio, workout_frequency: e.target.value });
